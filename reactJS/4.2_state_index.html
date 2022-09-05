@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="root"></div>
+</body>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+
+        const root = document.getElementById("root");
+
+        function Btn({text, fontSize = 100}){ // 기본값 설정
+            return (
+                <button
+                    style={{
+                    backgroundColor: "tomato",
+                    color:"white",
+                    padding : "10px 20px",
+                    border : 0,
+                    borderRadius: 10,
+                    margin : "10px",
+                    fontSize : fontSize
+                }}>
+                    {text}
+                </button>
+            )
+        }
+        Btn.propTypes = {
+            text: PropTypes.string.isRequired,
+            fontSize: PropTypes.number.isRequired,
+        };
+        function App(){
+            return (
+                <div>
+                    <Btn text="Save Change"/>
+                </div>
+            );
+        }
+        ReactDOM.render(<App />,root)
+
+
+    </script>
+</html>
+

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="root"></div>
+</body>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+
+        const root = document.getElementById("root");
+
+        function MiunitToHours(){
+            const [amount, setAmount] = React.useState(0);
+            const [flipped, setFlipped] = React.useState(false);
+            const onChange = (event) => {
+                setAmount(event.target.value)
+            }
+            const reset = () => {
+                setAmount(0);
+            }
+            const onFlip = () => {
+                setFlipped((current) => !current);
+                setAmount(0);
+            }
+            return (
+                <div>
+                    <h3>Super Converter</h3>
+                    <label for="Minute">Miunit</label>
+                    <input id="Miunit"
+                           placehoder="Miunit"
+                           type="number"
+                           value={flipped ? amount * 60 : amount }
+                           onChange={onChange} disabled={flipped}/>
+                    <h1>You want to convert </h1>
+                    <label for="Hours">Hours</label>
+                    <input value={flipped ? amount : Math.round(amount/60)}
+                           id="Hours"
+                           placeholder="Hours"
+                           type="number"
+                           disabled={!flipped}
+                           onChange={onChange}
+                    />
+                    <button onClick={reset}>reset</button>
+                    <button onClick={onFlip}>Flip</button>
+                </div>
+            );
+        }
+
+        function KmToMiles(){
+            return (
+                <h3>
+                    KM 2 M
+                </h3>
+            );
+        }
+
+        /* {}쓰면 자바스크립트를 쓸수 있다.*/
+        /*component*/
+        function App(){
+            const [index, setIndex] = React.useState("xx")
+            const onSelect = (event) => {
+                setIndex(event.target.value);
+            }
+            return (
+                <div>
+                    <h3>Super Converter</h3>
+                    <select onChange={onSelect}>
+                        <option value="xx">select your option</option>
+                        <option value="0">minutes & Hours</option>
+                        <option value="1">Km & Miles</option>
+                    </select>
+                    <hr/>
+                    {index === "xx"? "Please select your unit" : null}
+                    {index === "0"? <MiunitToHours /> : null}
+                    {index === "1"? <KmToMiles /> : null}
+                </div>
+            );
+        }
+        ReactDOM.render(<App />,root)
+
+
+    </script>
+</html>
+
